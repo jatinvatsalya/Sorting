@@ -5,6 +5,7 @@
 void bubbleSort(int arr[], int n);
 void selectionSort(int arr[], int n);
 void insertionSort(int arr[], int n);
+void mergeSortMain(int arr[], int n);
 
 int main() {
     // Write C code here
@@ -12,10 +13,12 @@ int main() {
     int arr1[8] = {8,7,6,5,4,3,2,1};
     int arr2[8] = {8,7,6,5,4,3,2,1};
     int arr3[8] = {8,7,6,5,4,3,2,1};
+    int arr4[8] = {8,7,6,5,4,3,2,1};
 
     bubbleSort(arr1,8);
     selectionSort(arr2, 8);
     insertionSort(arr3, 8);
+    mergeSortMain(arr4, 8);
 
     return 0;
 }
@@ -124,4 +127,55 @@ void bubbleSort(int arr[], int n) {
       printf(" %d ", arr[i] );
     }
     printf("\n swaps = %d\n", swaps);
+}
+
+void merge(int arr[], int left, int mid, int right) {
+    int i = left, j = mid + 1, k = 0;
+    int size = right - left + 1;
+    int *temp = (int *)malloc(size * sizeof(int));
+
+    while (i <= mid && j <= right) {
+        if (arr[i] <= arr[j])
+            temp[k++] = arr[i++];
+        else
+            temp[k++] = arr[j++];
+    }
+
+    while (i <= mid)
+        temp[k++] = arr[i++];
+    while (j <= right)
+        temp[k++] = arr[j++];
+
+    for (i = left, k = 0; i <= right; i++, k++)
+        arr[i] = temp[k];
+
+    free(temp);
+}
+
+// Recursive merge sort function
+void mergeSort(int arr[], int left, int right) {
+    if (left < right) {
+        int mid = left + (right - left) / 2;
+
+        // Recursively sort first and second halves
+        mergeSort(arr, left, mid);
+        mergeSort(arr, mid + 1, right);
+
+        // Merge the sorted halves
+        merge(arr, left, mid, right);
+    }
+}
+
+/*The mergeSort function recursively divides the array.
+The merge function combines two sorted halves.
+This version is elegant and easy to understand, but it uses the call stack, which may be a concern in memory-constrained environments.*/
+void mergeSortMain(int arr[], int n)
+{
+    int i = 0;
+    printf("\nMerge Sort\n");
+    mergeSort(arr, 0, n-1);
+    for ( i = 0; i < n; ++i )
+    {
+      printf(" %d ", arr[i] );
+    }
 }
