@@ -9,11 +9,13 @@ void insertionSort(int arr[], int n);
 int main() {
     // Write C code here
     printf("Hello\n");
-    int arr[6] = {7,4,3,8,2,6};
+    int arr1[8] = {8,7,6,5,4,3,2,1};
+    int arr2[8] = {8,7,6,5,4,3,2,1};
+    int arr3[8] = {8,7,6,5,4,3,2,1};
 
-    bubbleSort(arr, 6);
-    selectionSort(arr, 6);
-    insertionSort(arr, 6);
+    bubbleSort(arr1,8);
+    selectionSort(arr2, 8);
+    insertionSort(arr3, 8);
 
     return 0;
 }
@@ -28,6 +30,7 @@ void insertionSort(int arr[], int n)
     int i;
     int j;
     int key;
+    int swaps = 0;
 
     printf("\nInsertion Sort\n");
     for ( i = 1; i < n; ++i )
@@ -39,6 +42,7 @@ void insertionSort(int arr[], int n)
         {
             arr[ j + 1 ] = arr[ j ];
             --j;
+            ++swaps;
         }
         arr[ j + 1 ] = key;
     }
@@ -47,6 +51,7 @@ void insertionSort(int arr[], int n)
     {
         printf(" %d ", arr[i] );
     }
+    printf("\n swaps = %d\n", swaps);
 }
 
 /*Start with the first element of the array.
@@ -56,6 +61,7 @@ Move to the next position and repeat the process for the remaining unsorted part
 Continue until the entire array is sorted.*/
 void selectionSort(int arr[], int n) {
     int i, j, minIndex, temp;
+    int swaps = 0;
 
     printf("\nselction Sort\n");
     for (i = 0; i < n - 1; i++) {
@@ -72,12 +78,14 @@ void selectionSort(int arr[], int n) {
             temp = arr[i];
             arr[i] = arr[minIndex];
             arr[minIndex] = temp;
+            ++swaps;
         }
     }
     for ( i = 0; i < n; ++i )
     {
         printf(" %d ", arr[i] );
     }
+    printf("\n swaps = %d\n", swaps);
 }
 
 /*How it works:
@@ -90,6 +98,7 @@ Repeat the process for the remaining unsorted part of the array.*/
 void bubbleSort(int arr[], int n) {
     int i, j, temp;
     int swapped;
+    int swaps = 0;
 
     printf("\nBubble Sort\n");
     for (i = 0; i < n - 1; i++) {
@@ -103,6 +112,7 @@ void bubbleSort(int arr[], int n) {
                 arr[j] = arr[j + 1];
                 arr[j + 1] = temp;
                 swapped = 1;
+                ++swaps;
             }
         }
         // If no two elements were swapped in the inner loop, break
@@ -113,4 +123,5 @@ void bubbleSort(int arr[], int n) {
     {
       printf(" %d ", arr[i] );
     }
+    printf("\n swaps = %d\n", swaps);
 }
