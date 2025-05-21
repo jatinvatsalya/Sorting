@@ -1,6 +1,7 @@
 // Online C compiler to run C program online
 #include <stdio.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 void bubbleSort(int arr[], int n);
 void selectionSort(int arr[], int n);
@@ -130,40 +131,40 @@ void bubbleSort(int arr[], int n) {
 }
 
 void merge(int arr[], int left, int mid, int right) {
-    int i = left, j = mid + 1, k = 0;
-    int size = right - left + 1;
-    int *temp = (int *)malloc(size * sizeof(int));
+    int i = left, j = mid + 1, k = 0;
+    int size = right - left + 1;
+    int *temp = (int *)malloc(size * sizeof(int));
 
-    while (i <= mid && j <= right) {
-        if (arr[i] <= arr[j])
-            temp[k++] = arr[i++];
-        else
-            temp[k++] = arr[j++];
-    }
+    while (i <= mid && j <= right) {
+      if (arr[i] <= arr[j])
+        temp[k++] = arr[i++];
+      else
+       temp[k++] = arr[j++];
+    }
 
-    while (i <= mid)
-        temp[k++] = arr[i++];
-    while (j <= right)
-        temp[k++] = arr[j++];
+    while (i <= mid)
+       temp[k++] = arr[i++];
+    while (j <= right)
+       temp[k++] = arr[j++];
 
-    for (i = left, k = 0; i <= right; i++, k++)
-        arr[i] = temp[k];
+    for (i = left, k = 0; i <= right; i++, k++)
+       arr[i] = temp[k];
 
-    free(temp);
+    free(temp);
 }
 
 // Recursive merge sort function
 void mergeSort(int arr[], int left, int right) {
-    if (left < right) {
-        int mid = left + (right - left) / 2;
+    if (left < right) {
+        int mid = left + (right - left) / 2;
 
-        // Recursively sort first and second halves
-        mergeSort(arr, left, mid);
-        mergeSort(arr, mid + 1, right);
+        // Recursively sort first and second halves
+        mergeSort(arr, left, mid);
+        mergeSort(arr, mid + 1, right);
 
-        // Merge the sorted halves
-        merge(arr, left, mid, right);
-    }
+       // Merge the sorted halves
+        merge(arr, left, mid, right);
+    }
 }
 
 /*The mergeSort function recursively divides the array.
