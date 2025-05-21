@@ -7,6 +7,7 @@ void bubbleSort(int arr[], int n);
 void selectionSort(int arr[], int n);
 void insertionSort(int arr[], int n);
 void mergeSortMain(int arr[], int n);
+void swap(int * a, int * b);
 
 int main() {
     // Write C code here
@@ -79,9 +80,7 @@ void selectionSort(int arr[], int n) {
 
         // Swap the found minimum element with the first element
         if (minIndex != i) {
-            temp = arr[i];
-            arr[i] = arr[minIndex];
-            arr[minIndex] = temp;
+            swap(&arr[i], &arr[minIndex]);
             ++swaps;
         }
     }
@@ -112,9 +111,7 @@ void bubbleSort(int arr[], int n) {
         for (j = 0; j < n - i - 1; j++) {
             if (arr[j] > arr[j + 1]) {
                 // Swap arr[j] and arr[j + 1]
-                temp = arr[j];
-                arr[j] = arr[j + 1];
-                arr[j + 1] = temp;
+                swap(&arr[j], &arr[j+1]);
                 swapped = 1;
                 ++swaps;
             }
@@ -179,4 +176,12 @@ void mergeSortMain(int arr[], int n)
     {
       printf(" %d ", arr[i] );
     }
+}
+
+void swap(int * a, int * b)
+{
+    int temp;
+    temp = *a;
+    *a = *b;
+    *b = temp;
 }
