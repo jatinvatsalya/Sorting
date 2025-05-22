@@ -8,6 +8,7 @@ void selectionSort(int arr[], int n);
 void insertionSort(int arr[], int n);
 void mergeSortMain(int arr[], int n);
 void swap(int * a, int * b);
+void quickSortMain( int arr[], int n );
 
 int main() {
     // Write C code here
@@ -16,11 +17,13 @@ int main() {
     int arr2[8] = {8,7,6,5,4,3,2,1};
     int arr3[8] = {8,7,6,5,4,3,2,1};
     int arr4[8] = {8,7,6,5,4,3,2,1};
+    int arr5[8] = {8,7,6,5,4,3,2,1};
 
     bubbleSort(arr1,8);
     selectionSort(arr2, 8);
     insertionSort(arr3, 8);
     mergeSortMain(arr4, 8);
+    quickSortMain(arr5, 8);
 
     return 0;
 }
@@ -181,7 +184,62 @@ void mergeSortMain(int arr[], int n)
 void swap(int * a, int * b)
 {
     int temp;
-    temp = *a;
-    *a = *b;
-    *b = temp;
+    
+    if ( a != b )
+    {
+        temp = *a;
+        *a = *b;
+        *b = temp;
+    }
+}
+
+int partition(int arr[], int start, int end)
+{
+    int pivot = arr[ end ];
+    int i = start - 1;
+    int j = start;
+    
+    for ( j = start; j < end; ++j )
+    {
+        if ( arr[j] < pivot )
+        {
+            ++i;
+            swap( &arr[i], &arr[j] );
+        }
+    }
+    swap(&arr[i+1], &arr[end]);
+    
+    return i+1;
+}
+
+void quickSort(int arr[], int start, int end)
+{
+    int pivot;
+    if ( start <= end )
+    {
+        pivot = partition(arr, start, end);
+        
+        quickSort(arr, start, pivot - 1);
+        quickSort(arr, pivot + 1, end);
+    }
+}
+
+/*Quick sort is a fast sorting algorithm that works like this:
+
+1. **Pick a pivot** element from the array.
+2. **Partition** the array into two parts:
+   - Elements less than the pivot go to the left.
+   - Elements greater go to the right.
+3. **Recursively** apply the same steps to the left and right parts.
+
+It’s efficient, with average time complexity **O(n log n)**.*/
+void quickSortMain( int arr[], int n )
+{
+    int i = 0;
+    printf("\nQuick Sort\n");
+    quickSort(arr, 0, n-1);
+    for ( i = 0; i < n; ++i )
+    {
+      printf(" %d ", arr[i] );
+    }
 }
